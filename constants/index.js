@@ -15,39 +15,39 @@ export const bodyParts =
         },
         {
             name: "kardiyo",
-            image: require("../assets/images/slayt1.png")
+            image: require("../assets/images/kardiyo.jpg")
         },
         {
             name: "göğüs",
-            image: require("../assets/images/slayt1.png")
+            image: require("../assets/images/gogus.jpg")
         },
         {
-            name: "alt kol",
-            image: require("../assets/images/slayt1.png")
+            name: "arka kol",
+            image: require("../assets/images/arkakol.jpg")
         },
         {
-            name: "alt bacak",
-            image: require("../assets/images/slayt1.png")
+            name: "arka bacak",
+            image: require("../assets/images/arkabacak.jpg")
         },
         {
             name: "boyun",
-            image: require("../assets/images/slayt1.png")
+            image: require("../assets/images/boyun.jpg")
         },
         {
             name: "omuz",
-            image: require("../assets/images/slayt1.png")
+            image: require("../assets/images/omuz.jpg")
         },
         {
-            name: "üst kol",
-            image: require("../assets/images/slayt1.png")
+            name: "ön kol",
+            image: require("../assets/images/onkol.jpg")
         },
         {
-            name: "üst bacak",
-            image: require("../assets/images/slayt1.png")
+            name: "ön bacak",
+            image: require("../assets/images/onbacak.jpg")
         },
         {
             name: "bel",
-            image: require("../assets/images/slayt1.png")
+            image: require("../assets/images/bel.jpg")
         },
 
     ]    

@@ -49,6 +49,12 @@ const BodyPartCard = ({ item, index }) => {
                     className="absolute bottom-0 rounded-b-[35px]"
                     />
 
+                    <Text
+                        style={{fontSize:hp(2.3)}}
+                        className="text-white font-semibold text-center tracking-wide"
+                    >
+                        {item?.name}
+                    </Text>
 
             </TouchableOpacity>
         </View>
