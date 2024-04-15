@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ImageSlider from '../components/imageSlider';
-
+import ImageSlider from '../components/ImageSliderr';
+import BodyParts from '../components/BodyPartss';
 
 export default function Home() {
     return (
@@ -50,12 +50,13 @@ export default function Home() {
                 </View>
             </View>
 
-            {/* image slider */}
-
             <View>
                 <ImageSlider/>
             </View>
 
+            <View className="flex-1">
+                <BodyParts/>
+            </View>
 
         </SafeAreaView>
     )
