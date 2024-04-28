@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { fetchExercisesByBodypart } from '../api/exerciseDB';
@@ -6,11 +6,14 @@ import { demoExercises } from '../constants';
 import { StatusBar } from 'expo-status-bar';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ExerciseList from '../components/ExerciseList';
+import {ScrollView} from 'react-native-virtualized-view'
+
 
 export default function Exercises() {
     const router = useRouter();
     const item = useLocalSearchParams();
-    const [exercises, setExercises] = useState([demoExercises]);
+    const [exercises, setExercises] = useState(demoExercises);
     console.log("got item:", item)
 
     useEffect(() => {
@@ -48,6 +51,19 @@ export default function Exercises() {
         >
             <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
         </TouchableOpacity>
+
+        <View ClassName="mx-4 space-y-3 mt-4">
+            <Text style={{fontSize:hp(3)}} className="font-semibold text-neutral-700">
+                {item.name} exercises
+            </Text>
+
+            <View className="mb-10">
+                <ExerciseList data={exercises}/>
+            </View>
+
+        </View>
+
+
     </View>
 </ScrollView>
 
