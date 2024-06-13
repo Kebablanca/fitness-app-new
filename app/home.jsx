@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
@@ -6,8 +6,13 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ImageSlider from '../components/ImageSliderr';
 import BodyParts from '../components/BodyPartss';
+import { useRouter } from 'expo-router';
 
 export default function Home() {
+    const router = useRouter();
+    const handleImagePress = () => {
+        router.push('/calendarPage');
+    };
     return (
         <SafeAreaView className="flex-1 bg white flex space-y-5" edges={["top"]}>
             <StatusBar style="dark" />
@@ -20,7 +25,7 @@ export default function Home() {
                         style={{ fontSize: hp(4.5) }}
                         className="font-bold tracking-wider text-rose-500 "
                     >
-                        Egzersize
+                        Hoş Geldin
                     </Text>
 
 
@@ -28,17 +33,19 @@ export default function Home() {
                         style={{ fontSize: hp(4.5) }}
                         className="font-bold tracking-wider text-neutral-700 "
                     >
-                        Hazır ol!
+                        Halit Yavuz İbik
                     </Text>
                 </View>
 
                 <View className="flex justify-center items-center space-y-2">
-                    <Image
-                        source={require("../assets/images/vesikalik.jpg")}
-                        style={{ height: hp(6), width: hp(6) }}
-                        className="rounded-full"
-                    >
-                    </Image>
+                    <TouchableOpacity onPress={handleImagePress}>
+                        <Image
+                            source={require("../assets/images/vesikalik.jpg")}
+                            style={{ height: 100, width: 100 }}
+                            className="rounded-full"
+                        />
+                    </TouchableOpacity>
+                    <Text >Profil</Text>
 
 
                     <View
@@ -51,11 +58,11 @@ export default function Home() {
             </View>
 
             <View>
-                <ImageSlider/>
+                <ImageSlider />
             </View>
 
             <View className="flex-1">
-                <BodyParts/>
+                <BodyParts />
             </View>
 
         </SafeAreaView>

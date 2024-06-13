@@ -1,4 +1,4 @@
-import { View, Text, FlatList,TouchableOpacity } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router';
 import { Image } from 'expo-image';
@@ -28,16 +28,28 @@ const ExerciseCard = ({ item, router, index }) => {
     return (
 
         <View>
-            <TouchableOpacity className="flex py-3 space-y-2">
+            <TouchableOpacity onPress={()=> router.push({pathname: '/exerciseDetails', params: item})} className="flex py-3 space-y-2">
                 <View className="bg-neutral-200 shadow rounded-[25px]">
-                    <Image 
-                        source={{uri: item.gifUrl}}
+                    <Image
+                        source={{ uri: item.gifUrl }}
                         contentFit='cover'
-                        style={{width:wp(44), height:wp(52)}}
+                        style={{ width: wp(44), height: wp(52) }}
                         className="rounded-[25px]"
-                        />
+                    />
                 </View>
             </TouchableOpacity>
+
+            <Text
+                style={{ fontSize: hp(1.7) }}
+                className="text-neutral-700 font-semibold ml-1 tracking-wide"
+            >
+                {
+                    item?.name?.length>20? item.name.slice(0,25)+'...': item.name
+                }
+
+            </Text>
+
+
         </View>
     )
 }

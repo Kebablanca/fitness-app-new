@@ -34,7 +34,7 @@ export default function Index() {
 
                 <Animated.View entering={FadeInDown.delay(1500).springify()}>
                     <TouchableOpacity
-                        onPress={()=> router.push("home")}
+                        onPress={()=> router.push("login")}
                         style={{ height: hp(7), width: wp(80) }}
                         className="bg-rose-500 flex items-center justify-center mx-auto rounded-full border-[2px] border-neutral-200"
                     >
