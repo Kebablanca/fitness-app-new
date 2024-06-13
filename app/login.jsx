@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import { auth } from './FirebaseConfig';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [isSignup, setIsSignup] = useState(false); // Kullanıcı kayıt modunda mı kontrolü
     const router = useRouter();
 
-    const handleLogin = () => {
-        router.push('/home'); 
+    const handleLogin = async () => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            Alert.alert("Login Successful", "You have been successfully logged in!");
+            router.push('/home');
+        } catch (error) {
+            Alert.alert("Login Error", error.message);
+        }
     };
+
 
     return (
         <View className="flex-1 flex justify-center">
-            <Image className="h-full w-full absolute" source={require("../assets/images/welcome.png")} />
+            <Image style={styles.fullWidthImage} source={require("../assets/images/welcome.png")} />
             <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -29,9 +41,16 @@ export default function Login() {
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Giriş Yap</Text>
-            </TouchableOpacity>
+            {isSignup ? (
+                <TouchableOpacity style={styles.button} onPress={handleSignup}>
+                    <Text style={styles.buttonText}>Üye Ol</Text>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                    <Text style={styles.buttonText}>Giriş Yap</Text>
+                </TouchableOpacity>
+            )}
+
             <TouchableOpacity onPress={() => router.push('/signup')} style={styles.signupLink}>
                 <Text style={styles.signupText}>Üye Ol</Text>
             </TouchableOpacity>
@@ -47,10 +66,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
         padding: 16,
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 24,
+    fullWidthImage: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
     },
     input: {
         width: '100%',

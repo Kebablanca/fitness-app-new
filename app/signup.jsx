@@ -1,51 +1,40 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import { auth, db } from './FirebaseConfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore"; // Firestore için gerekli fonksiyonlar
 
 export default function Signup() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const router = useRouter();
 
-    const handleSignup = () => {
-        // Burada üye olma işlemlerini gerçekleştirebilirsiniz
-        console.log(`İsim: ${firstName}, Soyisim: ${lastName}, Email: ${email}`);
-        router.push('/login'); // Üye olduktan sonra giriş sayfasına yönlendir
+    const handleSignup = async () => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            await setDoc(doc(db, "users", user.uid), {
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            });
+            Alert.alert("Kayıt Başarılı", "Hesabınız başarıyla oluşturuldu!");
+        } catch (error) {
+            Alert.alert("Kayıt Başarısız", error.message);
+        }
     };
 
     return (
         <View className="flex-1 flex justify-center">
             <Image className="h-full w-full absolute" source={require("../assets/images/welcome.png")} />
             <Text style={styles.title}>Üye Ol</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="İsim"
-                value={firstName}
-                onChangeText={setFirstName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Soyisim"
-                value={lastName}
-                onChangeText={setLastName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
+            <TextInput style={styles.input} placeholder="First Name" value={firstName} onChangeText={setFirstName} />
+            <TextInput style={styles.input} placeholder="Last Name" value={lastName} onChangeText={setLastName} />
+            <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" />
+            <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
             <TouchableOpacity style={styles.button} onPress={handleSignup}>
                 <Text style={styles.buttonText}>Üye Ol</Text>
             </TouchableOpacity>

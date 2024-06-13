@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -7,9 +7,29 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ImageSlider from '../components/ImageSliderr';
 import BodyParts from '../components/BodyPartss';
 import { useRouter } from 'expo-router';
+import { auth, db } from './FirebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default function Home() {
     const router = useRouter();
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (auth.currentUser) {
+                const userRef = doc(db, "users", auth.currentUser.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    setUserName(userSnap.data().firstName + ' ' + userSnap.data().lastName);
+                } else {
+                    console.log("No such document!");
+                }
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
     const handleImagePress = () => {
         router.push('/calendarPage');
     };
@@ -17,7 +37,6 @@ export default function Home() {
         <SafeAreaView className="flex-1 bg white flex space-y-5" edges={["top"]}>
             <StatusBar style="dark" />
 
-            {/*punchline and avatar */}
             <View className="flex-row justify-between items-center mx-5">
                 <View className="space-y-2">
 
@@ -29,11 +48,8 @@ export default function Home() {
                     </Text>
 
 
-                    <Text
-                        style={{ fontSize: hp(4.5) }}
-                        className="font-bold tracking-wider text-neutral-700 "
-                    >
-                        Halit Yavuz İbik
+                    <Text style={{ fontSize: hp(4.5) }} className="font-bold tracking-wider text-neutral-700 ">
+                        {userName || 'Kullanıcı'}
                     </Text>
                 </View>
 
