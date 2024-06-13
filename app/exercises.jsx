@@ -54,7 +54,7 @@ export default function Exercises() {
 
         <View ClassName="mx-4 space-y-3 mt-4">
             <Text style={{fontSize:hp(3)}} className="font-semibold text-neutral-700">
-                {item.name} exercises
+                {item.tr} egzersizleri
             </Text>
 
             <View className="mb-10">

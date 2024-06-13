@@ -11,43 +11,53 @@ export const bodyParts =
     [
         {
             name: "back",
-            image: require("../assets/images/slayt1.png")
+            image: require("../assets/images/slayt1.png"),
+            tr: "sırt"
         },
         {
             name: "cardio",
-            image: require("../assets/images/kardiyo.jpg")
+            image: require("../assets/images/kardiyo.jpg"),
+            tr: "kardiyo"
         },
         {
             name: "chest",
-            image: require("../assets/images/gogus.jpg")
+            image: require("../assets/images/gogus.jpg"),
+            tr: "göğüs"
         },
         {
             name: "lower arms",
-            image: require("../assets/images/arkakol.jpg")
+            image: require("../assets/images/arkakol.jpg"),
+            tr: "triseps"
         },
         {
             name: "lower legs",
-            image: require("../assets/images/arkabacak.jpg")
+            image: require("../assets/images/arkabacak.jpg"),
+            tr: "alt bacak"
         },
         {
             name: "neck",
-            image: require("../assets/images/boyun.jpg")
+            image: require("../assets/images/boyun.jpg"),
+            tr: "boyun"
         },
         {
             name: "shoulders",
-            image: require("../assets/images/omuz.jpg")
+            image: require("../assets/images/omuz.jpg"),
+            tr: "omuz"
         },
         {
             name: "upper arms",
-            image: require("../assets/images/onkol.jpg")
+            image: require("../assets/images/onkol.jpg"),
+            tr: "üst kol"
         },
         {
             name: "upper legs",
-            image: require("../assets/images/onbacak.jpg")
+            image: require("../assets/images/onbacak.jpg"),
+            tr: "üst bacak"
         },
         {
             name: "waist",
-            image: require("../assets/images/bel.jpg")
+            image: require("../assets/images/bel.jpg"),
+            tr: "bel"
         },
 
     ]
